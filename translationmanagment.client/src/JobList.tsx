@@ -36,9 +36,6 @@ const JobList: React.FC = () => {
 
     const handleJobAdded = () => {
         setShowAddJob(false);
-        //setLoading(true);
-        //setError(null);
-        //setJobs([]);
         fetchJobs();
     };
 
@@ -52,16 +49,28 @@ const JobList: React.FC = () => {
             {showAddJob ? (
                 <AddJob onJobAdded={handleJobAdded} />
             ) : (
-                <ul>
-                    {jobs.map(job => (
-                        <li key={job.id}>
-                            <p>Original Content: {job.originalContent}</p>
-                            <p>Translated Content: {job.translatedContent}</p>
-                            <p>Customer: {job.customerName}</p>
-                            <p>Status: {job.status}</p>
-                        </li>
-                    ))}
-                </ul>
+                    <table className="table table-striped" aria-labelledby="tabelLabel">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Original Content</th>
+                                <th>Translated Content</th>
+                                <th>Customer</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {jobs.map(job =>
+                                <tr key={job.id}>
+                                    <td>{job.id}</td>
+                                    <td>{job.originalContent}</td>
+                                    <td>{job.translatedContent}</td>
+                                    <td>{job.customerName}</td>
+                                    <td>{job.status}</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
             )}
         </div>
     );
